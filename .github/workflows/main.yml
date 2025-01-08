@@ -1,38 +1,31 @@
-name: Deploy to GitHub Pages
+name: Build and Deploy Blazor Web App
 
-# Запускаем магию только на пуши в main
 on:
   push:
-    branches: master
-    
+    branches:
+      - master
+
 jobs:
-  deploy-to-github-pages:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      # клонируем репозиторий на виртуальную машину
-    - uses: actions/checkout@v2
-    
-      # ставим нужный SDK (можно использовать и более старые)
-    - name: Setup .NET 9
-      uses: actions/setup-dotnet@v1
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '9.0.x'
-        include-prerelease: true
-        
-      # генерируем статические файлы
-    - name: Publish .NET Core Project
-      run: dotnet publish muazzin_mobile.csproj -c Release --output release --nologo
+        dotnet-version: '8.0' # Loyihangizning .NET versiyasini kiriting
 
-    - name: Uploading files to gh-pages branch
-      uses: muhammadhafiz18/muazzin_mobile-action@4.1.4
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build project
+      run: dotnet publish -c Release -o ./publish
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
       with:
-        branch: gh-pages
-        folder: release/wwwroot
-
-      # меняем '/' на '/BlazorGitHubPagesDemo/'
-    - name: Change base-tag in index.html from / to muazzin_mobile
-      run: sed -i 's/<base href="\/" \/>/<base href="\/muazzin_mobile\/" \/>/g' release/wwwroot/index.html
-
-    # отключаем jekyll
-    - name: Add .nojekyll file
-      run: touch release/wwwroot/.nojekyll
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./publish/wwwroot
