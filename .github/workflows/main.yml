@@ -1,35 +1,21 @@
-name: Deploy to GitHub Pages
-
-# Запускаем магию только на пуши в main
+name: Deploy Code to Release Branch 🚀
 on:
-  push:
-    branches: master
-    
+  workflow_dispatch:
+
 jobs:
-  deploy-to-github-pages:
+  build:
+    name: Push to Release Branch
     runs-on: ubuntu-latest
     steps:
-      # клонируем репозиторий на виртуальную машину
-    - uses: actions/checkout@v2
-    
-      # ставим нужный SDK (можно использовать и более старые)
-    - name: Setup .NET 9
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '9.0.x'
-        include-prerelease: true
-        
-      # генерируем статические файлы
-    - name: Publish .NET Core Project
-      run: dotnet publish BlazorGitHubPagesDemo.csproj -c Release --output release --nologo
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Uploading files to gh-pages branch
-      uses: JamesIves/github-pages-deploy-action@4.1.4
-      with:
-        branch: gh-pages
-        folder: release/wwwroot
-    - name: Change base-tag in index.html from / to BlazorGitHubPagesDemo
-      run: sed -i 's/<base href="\/" \/>/<base href="\/BlazorGitHubPagesDemo\/" \/>/g' release/wwwroot/index.html
-
-    - name: Add .nojekyll file
-      run: touch release/wwwroot/.nojekyll
+      # Workflow dispatch event that pushes the current version to the release branch.
+      # From here the secondary production deployment workflow will trigger to build the dependencies.
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: releases/v4
+          folder: .
+          clean: false
+          single-commit: true
