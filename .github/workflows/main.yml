@@ -24,7 +24,7 @@ jobs:
       run: dotnet publish muazzin_mobile.csproj -c Release --output release --nologo
 
     - name: Uploading files to gh-pages branch
-      uses: muhammadhafiz18/github-pages-deploy-action@4.1.4
+      uses: muhammadhafiz18/muazzin_mobile-deploy-action@4.1.4
       with:
         branch: gh-pages
         folder: release/wwwroot
