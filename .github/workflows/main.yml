@@ -1,21 +1,38 @@
-name: Deploy Code to Release Branch 🚀
-on:
-  workflow_dispatch:
+name: Deploy to GitHub Pages
 
+# Запускаем магию только на пуши в main
+on:
+  push:
+    branches: main
+    
 jobs:
-  build:
-    name: Push to Release Branch
+  deploy-to-github-pages:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      # клонируем репозиторий на виртуальную машину
+    - uses: actions/checkout@v2
+    
+      # ставим нужный SDK (можно использовать и более старые)
+    - name: Setup .NET 9
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '9.0.x'
+        include-prerelease: true
+        
+      # генерируем статические файлы
+    - name: Publish .NET Core Project
+      run: dotnet publish muazzin_mobile.csproj -c Release --output release --nologo
 
-      # Workflow dispatch event that pushes the current version to the release branch.
-      # From here the secondary production deployment workflow will trigger to build the dependencies.
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: releases/v4
-          folder: .
-          clean: false
-          single-commit: true
+    - name: Uploading files to gh-pages branch
+      uses: muhammadhafiz18/github-pages-deploy-action@4.1.4
+      with:
+        branch: gh-pages
+        folder: release/wwwroot
+
+    # меняем '/' на '/BlazorGitHubPagesDemo/'
+    - name: Change base-tag in index.html from / to muazzin_mobile
+      run: sed -i 's/<base href="\/" \/>/<base href="\/muazzin_mobile\/" \/>/g' release/wwwroot/index.html
+
+    # отключаем jekyll
+    - name: Add .nojekyll file
+      run: touch release/wwwroot/.nojekyll
