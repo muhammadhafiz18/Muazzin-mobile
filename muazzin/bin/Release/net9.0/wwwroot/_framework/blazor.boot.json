@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "muazzin",
   "resources": {
-    "hash": "sha256-Z+cbmCut2Rg2tftoW5RTkzUavJ9rQfeC5bKmwPBOgPg=",
+    "hash": "sha256-oXIDoUOO3MjCuplPj308tR1jvU2oWXfY/+12m5FCCCk=",
     "fingerprinting": {
       "Microsoft.AspNetCore.Authorization.qe23mgxr71.wasm": "Microsoft.AspNetCore.Authorization.wasm",
       "Microsoft.AspNetCore.Components.flveird317.wasm": "Microsoft.AspNetCore.Components.wasm",
@@ -205,8 +205,8 @@
       "icudt_CJK.tjcz0u77k5.dat": "icudt_CJK.dat",
       "icudt_EFIGS.tptq2av103.dat": "icudt_EFIGS.dat",
       "icudt_no_CJK.lfu7j35m59.dat": "icudt_no_CJK.dat",
-      "muazzin.p5w6dp9e15.wasm": "muazzin.wasm",
-      "muazzin.8h8ndcbosb.pdb": "muazzin.pdb"
+      "muazzin.mjyymqown7.wasm": "muazzin.wasm",
+      "muazzin.fvh0aaw1ny.pdb": "muazzin.pdb"
     },
     "jsModuleNative": {
       "dotnet.native.hmanx9razn.js": "sha256-d7UNSArplVrX3arY2Kmhxp1wN79ng8hLqIBrkiQ9Gbo="
@@ -420,10 +420,10 @@
       "WindowsBase.377bly7twj.wasm": "sha256-0VmBdMjdc0nZGHDSfaGirT6y3mJTM0qx8eqCUC/rpiE=",
       "mscorlib.o0184ey5ia.wasm": "sha256-2GxNKZQJVJvYMUxSTuXa5V2qxawSMMHZtwG33SKVCZU=",
       "netstandard.hb3h2rr8mk.wasm": "sha256-DWn9+RH/ElZQ6imlYqVwZvir1KTzNwY18AzGmnyiymU=",
-      "muazzin.p5w6dp9e15.wasm": "sha256-TSmgghmFX/BUy8zO+2cGQs4u15Ea4Kj54lhrLR9Hd7U="
+      "muazzin.mjyymqown7.wasm": "sha256-nh4KlHiA/7Kz6QTUehuR+p9UrvNDvdNQCXtIopa2AWQ="
     },
     "pdb": {
-      "muazzin.8h8ndcbosb.pdb": "sha256-rBfxs8aExhdmKQwllDueWVB2DvRp5DfAw+kL1xHknGQ="
+      "muazzin.fvh0aaw1ny.pdb": "sha256-hbMFrUdA0FfdYFqKZz0x8USAiXhdj9tV5yCWBPKZL0M="
     }
   },
   "cacheBootResources": true,

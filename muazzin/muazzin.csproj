@@ -13,4 +13,9 @@
     <PackageReference Include="newtonsoft.json" Version="13.0.3" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <PublishUrl>docs</PublishUrl>
+  </PropertyGroup>
+
 </Project>
